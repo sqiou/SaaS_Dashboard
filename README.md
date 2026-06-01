@@ -1,388 +1,440 @@
-# SaaS Dashboard Platform - Interview Ready Project 🚀
+# SaaS Dashboard Platform
 
-A production-grade, multi-tenant SaaS dashboard platform built with cutting-edge technologies. This is the perfect portfolio project showcasing enterprise-level architecture and modern web development practices.
+A production-grade, multi-tenant SaaS dashboard platform built with cutting-edge technologies. This is a complete, interview-ready project showcasing enterprise-level architecture and modern web development practices.
 
-## ✨ Key Features
+## 🎯 Quick Start (5 Minutes)
 
-- 🔐 **Authentication**: NextAuth.js with JWT, credentials, and OAuth support
-- 🏢 **Multi-tenancy**: Organization + Workspace model for ultimate flexibility
-- 👥 **Role-Based Access Control**: Admin, User, Viewer roles with permissions
-- 📊 **Analytics Dashboard**: Real-time charts and metrics with Recharts
-- ⚡ **Real-time Data**: TanStack Query for server state, Zustand for UI state
-- 🎨 **Design System**: Custom Tailwind component library with Radix UI
-- 📈 **Infinite Scrolling**: Optimized table views with pagination
-- ✨ **Optimistic Updates**: Instant UI feedback with automatic sync
-- 📋 **Audit Logs**: Complete audit trail for compliance
-- 🛠️ **Admin Panel**: User, organization, and system management
-- 🚀 **Workspace Switching**: Seamless context switching between workspaces
+### Prerequisites
+- Node.js 18+
+- pnpm 8+ (or npm 9+)
+- PostgreSQL 12+ (or Docker)
 
-## 📁 Project Structure
+### Installation & Running
+
+```bash
+# 1. Install dependencies
+pnpm install
+
+# 2. Setup database with Docker
+docker-compose up -d
+
+# 3. Setup environment files
+cp apps/web/.env.example apps/web/.env.local
+cp apps/admin/.env.example apps/admin/.env.local
+cp packages/db/.env.example packages/db/.env
+
+# 4. Initialize database
+cd packages/db && pnpm db:push && cd ../..
+
+# 5. Start development servers
+pnpm dev
+```
+
+Then open:
+- **Dashboard**: http://localhost:3000
+- **Admin Panel**: http://localhost:3001
+
+### Demo Credentials
+- **Email**: demo@example.com
+- **Password**: password
+
+## 📊 Project Overview
+
+This SaaS platform includes two fully-functional Next.js applications:
+
+### 🌐 Web Dashboard (Port 3000)
+- Multi-workspace support with workspace switching
+- Real-time task management and project tracking
+- Analytics dashboard with charts and metrics
+- Team collaboration features with role-based access
+- Responsive UI with Tailwind CSS
+
+### 🔧 Admin Panel (Port 3001)
+- User management and role assignment
+- Organization and workspace administration
+- System analytics and monitoring
+- Comprehensive audit logs for compliance
+- System settings and configuration
+
+## ✨ Features
+
+### Authentication & Authorization
+- Email/password authentication with NextAuth.js
+- JWT token-based sessions with secure httpOnly cookies
+- Role-based access control (Admin, User, Viewer)
+- Session management and logout functionality
+- Protected routes with middleware
+
+### Multi-Tenancy
+- Organization and Workspace models for flexibility
+- Workspace members with granular role permissions
+- Seamless workspace switching
+- Database-level tenant isolation
+- User invitation system with pending invitations
+
+### Dashboard Features
+- **Projects**: Create, edit, delete, and archive projects
+- **Tasks**: Manage tasks with status, priority, and due dates
+- **Teams**: Invite members, assign roles, manage permissions
+- **Analytics**: Real-time charts and metrics using Recharts
+- **Workspace Settings**: Configure workspace preferences
+- **Audit Logs**: Complete audit trail for all actions
+
+### Admin Features
+- **System Dashboard**: Monitor organizations, users, and sessions
+- **User Management**: View and manage all users
+- **Organizations**: Manage organizational data
+- **Analytics**: System-wide analytics and health monitoring
+- **Settings**: Configure system-wide preferences
+
+## 🏗️ Architecture
+
+### Tech Stack
+
+**Frontend**
+- Next.js 14 with App Router
+- React 18 with TypeScript
+- Tailwind CSS for styling
+- TanStack Query for server state management
+- Zustand for lightweight UI state
+- Recharts for analytics
+
+**Backend**
+- Next.js API Routes
+- Prisma ORM for database access
+- NextAuth.js for authentication
+- PostgreSQL database
+
+**Development**
+- Turbo for monorepo management
+- pnpm for package management
+- TypeScript for type safety
+- ESLint for code quality
+
+### Project Structure
 
 ```
 saas-dashboard/
 ├── apps/
-│   ├── web/                    # Main dashboard (http://localhost:3000)
+│   ├── web/                          # Main dashboard
 │   │   ├── src/
-│   │   │   ├── app/           # Next.js 14 app router
-│   │   │   │   ├── dashboard/ # Dashboard page
-│   │   │   │   ├── projects/  # Projects management
-│   │   │   │   ├── tasks/     # Task management
-│   │   │   │   ├── team/      # Team collaboration
-│   │   │   │   ├── analytics/ # Analytics views
-│   │   │   │   ├── settings/  # Workspace settings
-│   │   │   │   └── api/       # API routes
-│   │   │   ├── components/    # React components
-│   │   │   ├── hooks/         # Custom React hooks
-│   │   │   ├── lib/           # Utilities & auth
-│   │   │   ├── store/         # Zustand stores
-│   │   │   └── styles/        # Global styles
-│   │   └── next.config.js
+│   │   │   ├── app/                  # Next.js 14 app router
+│   │   │   │   ├── dashboard/        # Dashboard page
+│   │   │   │   ├── projects/         # Projects management
+│   │   │   │   ├── tasks/            # Task management
+│   │   │   │   ├── team/             # Team collaboration
+│   │   │   │   ├── analytics/        # Analytics views
+│   │   │   │   ├── settings/         # Workspace settings
+│   │   │   │   └── api/              # API routes
+│   │   │   ├── components/           # React components
+│   │   │   ├── hooks/                # Custom React hooks
+│   │   │   ├── lib/                  # Utilities & auth
+│   │   │   ├── store/                # Zustand stores
+│   │   │   └── styles/               # Global styles
+│   │   ├── next.config.js
+│   │   ├── tailwind.config.js
+│   │   ├── postcss.config.js
+│   │   └── tsconfig.json
 │   │
-│   └── admin/                  # Admin panel (http://localhost:3001)
+│   └── admin/                        # Admin panel
 │       ├── src/
 │       │   ├── app/
-│       │   │   ├── users/     # User management
-│       │   │   ├── organizations/  # Org management
-│       │   │   ├── analytics/ # System analytics
-│       │   │   ├── audit-logs/# Audit trail
-│       │   │   └── settings/  # System settings
+│       │   │   ├── users/            # User management
+│       │   │   ├── organizations/    # Org management
+│       │   │   ├── analytics/        # System analytics
+│       │   │   ├── audit-logs/       # Audit trail
+│       │   │   └── settings/         # System settings
 │       │   └── ...
-│       └── next.config.js
+│       ├── next.config.js
+│       ├── tailwind.config.js
+│       ├── postcss.config.js
+│       └── tsconfig.json
 │
 ├── packages/
-│   ├── ui/                    # Design system
-│   │   └── src/
-│   │       └── index.tsx      # Button, Card, Badge, etc
+│   ├── ui/                           # Design system
+│   │   ├── src/
+│   │   │   └── index.tsx             # Shared components
+│   │   ├── package.json
+│   │   └── tsconfig.json
 │   │
-│   ├── api/                   # API client
-│   │   └── src/
-│   │       └── index.ts       # Typed API endpoints
+│   ├── api/                          # API client
+│   │   ├── src/
+│   │   │   └── index.ts              # Typed API endpoints
+│   │   ├── package.json
+│   │   └── tsconfig.json
 │   │
-│   ├── types/                 # Shared types
-│   │   └── src/
-│   │       └── index.ts       # User, Project, Task, etc
+│   ├── types/                        # Shared types
+│   │   ├── src/
+│   │   │   └── index.ts              # User, Project, Task types
+│   │   ├── package.json
+│   │   └── tsconfig.json
 │   │
-│   ├── db/                    # Prisma ORM
+│   ├── db/                           # Prisma ORM
 │   │   ├── prisma/
-│   │   │   └── schema.prisma # Database schema
-│   │   └── migrations/        # DB migrations
+│   │   │   └── schema.prisma         # Database schema
+│   │   ├── migrations/               # DB migrations
+│   │   ├── package.json
+│   │   └── .env.example
 │   │
-│   └── config/                # Shared configs
+│   └── config/                       # Shared configs
 │       ├── tsconfig.json
-│       └── eslint.json
+│       ├── eslint.json
+│       └── package.json
 │
-├── docker-compose.yml         # Local dev environment
-├── Dockerfile                 # Production image
-├── turbo.json                 # Turborepo config
-├── package.json               # Root workspace
-├── QUICKSTART.md              # 5-minute setup
-├── DEPLOYMENT.md              # Production guide
-├── CONTRIBUTING.md            # Contribution guide
-└── README.md                  # This file
+├── docker-compose.yml                # Docker setup
+├── Dockerfile                        # Production image
+├── turbo.json                        # Turborepo config
+├── package.json                      # Root workspace
+├── pnpm-workspace.yaml               # pnpm workspaces
+└── README.md                         # This file
 ```
 
-## 🚀 Quick Start (5 minutes)
+### Database Schema
 
-### 1. Prerequisites
-- Node.js 18+ 
-- pnpm 8+ (or npm 9+)
-- PostgreSQL 12+ (or Docker)
+The project uses Prisma ORM with the following models:
 
-### 2. Clone & Install
+- **User**: Authentication and profile
+- **Organization**: Top-level tenant container
+- **Workspace**: Sub-tenant for organizations
+- **Project**: Workspace project/container
+- **Task**: Individual work items with status and priority
+- **AuditLog**: Complete audit trail for compliance
+- **Session**: NextAuth sessions
+- Plus supporting models for members and relationships
 
+## 📦 Available Commands
+
+### Development
 ```bash
-git clone https://github.com/yourusername/saas-dashboard.git
-cd saas-dashboard
-pnpm install
-```
-
-### 3. Database Setup
-
-```bash
-# Option A: Docker (recommended)
-docker-compose up -d
-
-# Option B: Manual PostgreSQL
-# Create database: saas_db
-# Create user: user / password
-```
-
-### 4. Environment Setup
-
-```bash
-cp apps/web/.env.example apps/web/.env.local
-cp apps/admin/.env.example apps/admin/.env.local
-cp packages/db/.env.example packages/db/.env
-```
-
-Edit the `.env.local` files with your configuration.
-
-### 5. Initialize Database
-
-```bash
-cd packages/db
-pnpm db:push
-cd ../..
-```
-
-### 6. Start Development
-
-```bash
-pnpm dev
-```
-
-**Open in browser:**
-- Dashboard: [http://localhost:3000](http://localhost:3000)
-- Admin: [http://localhost:3001](http://localhost:3001)
-
-**Demo credentials:**
-- Email: `demo@example.com`
-- Password: `password`
-
-## 📚 Documentation
-
-- **[QUICKSTART.md](./QUICKSTART.md)** - 5-minute setup guide
-- **[DEPLOYMENT.md](./DEPLOYMENT.md)** - Production deployment
-- **[CONTRIBUTING.md](./CONTRIBUTING.md)** - How to contribute
-
-## 🛠️ Tech Stack
-
-### Frontend
-- **Next.js 14** - React framework with app router
-- **React 18** - UI library
-- **TypeScript** - Type safety
-- **Tailwind CSS** - Styling
-- **Radix UI** - Unstyled component primitives
-
-### State Management
-- **TanStack Query** - Server state management & caching
-- **Zustand** - Lightweight UI state management
-
-### Backend & Database
-- **Prisma** - ORM for database
-- **PostgreSQL** - Relational database
-- **NextAuth.js** - Authentication
-
-### Visualization
-- **Recharts** - React charts library
-
-### Monorepo & Build
-- **Turborepo** - Monorepo orchestration
-- **pnpm** - Fast package manager
-- **TypeScript** - Type checking
-
-## 📋 What's Included
-
-### Dashboard Features
-- ✅ Multi-workspace support with switcher
-- ✅ Real-time analytics dashboard with charts
-- ✅ Project management system
-- ✅ Task management with filters
-- ✅ Team member management
-- ✅ Workspace settings
-- ✅ Infinite scroll tables
-- ✅ Optimistic updates (add/edit/delete instantly)
-
-### Admin Features
-- ✅ System-wide user management
-- ✅ Organization management
-- ✅ System analytics and metrics
-- ✅ Complete audit logs
-- ✅ Email configuration
-- ✅ Security settings
-- ✅ Rate limiting configuration
-
-### Architecture Features
-- ✅ RBAC with admin/user/viewer roles
-- ✅ Multi-tenant database design
-- ✅ Audit trail for compliance
-- ✅ Type-safe API client
-- ✅ Shared design system
-- ✅ Monorepo structure
-- ✅ Docker support
-
-## 🗄️ Database Schema
-
-Key models:
-- **User** - Application users
-- **Organization** - Company/team container
-- **Workspace** - Sub-tenant within organization
-- **WorkspaceMember** - User + role in workspace
-- **Project** - Project container
-- **Task** - Individual tasks with assignments
-- **AuditLog** - Complete audit trail
-- **AnalyticsData** - Metrics storage
-
-[View full schema](./packages/db/prisma/schema.prisma)
-
-## 🔐 Security Features
-
-- ✅ NextAuth.js JWT authentication
-- ✅ Password hashing with bcrypt
-- ✅ SQL injection prevention (Prisma)
-- ✅ CORS configuration
-- ✅ Rate limiting ready
-- ✅ Audit logging
-- ✅ Role-based access control
-- ✅ Environment variable secrets
-
-## 📊 API Design
-
-### RESTful Endpoints
-```
-GET    /api/workspaces/:id
-PATCH  /api/workspaces/:id
-DELETE /api/workspaces/:id
-
-GET    /api/projects?workspaceId=...
-POST   /api/workspaces/:id/projects
-
-GET    /api/tasks?projectId=...
-PATCH  /api/tasks/:id
-DELETE /api/tasks/:id
-
-GET    /api/audit-logs?workspaceId=...
-GET    /api/analytics/stats?workspaceId=...
-```
-
-### Typed API Client
-```typescript
-import { api } from '@saas/api';
-
-// Fully typed
-const projects = await api.projects.list(workspaceId);
-const updated = await api.projects.update(id, { name: 'New Name' });
-```
-
-## 🎨 Component Library
-
-Reusable components in `@saas/ui`:
-- Button
-- Card
-- Input
-- Label
-- Badge
-- LoadingSpinner
-- EmptyState
-- And more...
-
-```typescript
-import { Button, Card, Badge } from '@saas/ui';
-```
-
-## 📦 Workspace Scripts
-
-```bash
-# Development
-pnpm dev              # Start all apps
+pnpm dev              # Start all development servers
 pnpm build            # Build all packages
-
-# Type & Lint
-pnpm type-check       # TypeScript checking
-pnpm lint             # ESLint
-
-# Testing
+pnpm type-check       # Run TypeScript type checking
+pnpm lint             # Lint all code
 pnpm test             # Run tests
-pnpm test --coverage  # Coverage report
+pnpm clean            # Clean all node_modules and builds
+```
 
-# Database
+### Database
+```bash
 cd packages/db
-pnpm db:push          # Sync schema
-pnpm db:migrate       # Create migration
-pnpm db:studio        # Prisma Studio GUI
 
-# Clean
-pnpm clean            # Remove node_modules & builds
+pnpm db:push          # Sync Prisma schema to database
+pnpm db:migrate       # Create and run migrations
+pnpm db:studio        # Open Prisma Studio (visual DB manager)
+pnpm generate         # Generate Prisma client
+```
+
+### Workspace-specific
+```bash
+cd apps/web
+pnpm dev              # Start web dashboard only
+
+cd apps/admin
+pnpm dev              # Start admin panel only
+
+cd packages/ui
+pnpm build            # Build UI component library
 ```
 
 ## 🚀 Deployment
 
-### Docker
+### Deploy to Vercel
+
+The easiest way to deploy is using [Vercel](https://vercel.com):
+
 ```bash
-docker build -t saas-dashboard .
-docker run -p 3000:3000 -p 3001:3001 saas-dashboard
+# Push to GitHub
+git push origin main
+
+# Connect repo to Vercel
+# - Web app: apps/web
+# - Admin app: apps/admin
+# Set environment variables in Vercel dashboard
+# Deploy!
 ```
 
-### Vercel (Recommended)
-```bash
-vercel deploy --prod
-```
+### Docker Deployment
 
-### Docker Compose
 ```bash
+# Build Docker image
+docker build -t saas-dashboard:latest .
+
+# Run with Docker Compose (includes PostgreSQL)
 docker-compose up -d
+
+# View logs
+docker-compose logs -f
+
+# Stop services
+docker-compose down
 ```
 
-See [DEPLOYMENT.md](./DEPLOYMENT.md) for detailed production setup.
+### Environment Variables
 
-## 🎯 Why This Project Stands Out
+Create `.env.local` files in `apps/web`, `apps/admin`, and `packages/db`:
 
-1. **Enterprise Architecture** - Multi-tenant design with workspaces
-2. **Full-Stack** - Frontend, backend, database, admin panel
-3. **Production-Ready** - Docker, environment configs, error handling
-4. **Type-Safe** - Full TypeScript across the stack
-5. **Scalable** - Monorepo structure, database indexing, caching
-6. **Interview-Ready** - Well-documented, clean code, best practices
-7. **Feature-Complete** - Auth, RBAC, analytics, audit logs
-8. **Modern Stack** - Next.js 14, React 18, TypeScript, Tailwind
+```env
+# Database
+DATABASE_URL=postgresql://user:password@localhost:5432/saas_db
 
-## 📈 Performance
+# NextAuth
+NEXTAUTH_SECRET=your-secret-key-here
+NEXTAUTH_URL=http://localhost:3000
 
-- Client-side caching: 5-minute stale time
-- Database indexes on key columns
-- Pagination support
-- Image optimization
-- Bundle size optimized
-- Lighthouse score > 90 (target)
+# API Configuration
+NEXT_PUBLIC_API_URL=http://localhost:3000/api
+```
 
-## 🧪 Testing
-
+Generate a secure NEXTAUTH_SECRET:
 ```bash
-# Unit tests
-pnpm test
+openssl rand -base64 32
+```
 
-# Watch mode
-pnpm test --watch
+## 🏃 Troubleshooting
 
-# Coverage
-pnpm test --coverage
+### Port Already in Use
+```bash
+# Kill process on port 3000 or 3001
+lsof -ti:3000 | xargs kill -9
+lsof -ti:3001 | xargs kill -9
+```
+
+### Database Connection Issues
+```bash
+# Check if PostgreSQL is running
+docker-compose ps
+
+# Restart services
+docker-compose restart
+
+# Reset database
+cd packages/db
+pnpm db:push --force-reset
+```
+
+### Dependencies Issues
+```bash
+# Clean and reinstall
+pnpm clean
+pnpm install
+
+# Clear turbo cache
+pnpm exec turbo prune --scope=@saas/web --docker
+```
+
+## 📚 Code Examples
+
+### Creating a Task API Endpoint
+
+```typescript
+// apps/web/src/app/api/tasks/route.ts
+import { prisma } from '@saas/db';
+import { NextRequest, NextResponse } from 'next/server';
+
+export async function POST(request: NextRequest) {
+  const body = await request.json();
+  
+  const task = await prisma.task.create({
+    data: {
+      title: body.title,
+      projectId: body.projectId,
+      priority: body.priority,
+      dueDate: body.dueDate,
+    },
+  });
+
+  return NextResponse.json(task);
+}
+```
+
+### Using the API Client
+
+```typescript
+// apps/web/src/pages/tasks.tsx
+import { tasksApi } from '@saas/api';
+import { useQuery } from '@tanstack/react-query';
+
+export default function TasksPage() {
+  const { data: tasks } = useQuery({
+    queryKey: ['tasks'],
+    queryFn: () => tasksApi.getTasks(),
+  });
+
+  return (
+    <div>
+      {tasks?.map(task => (
+        <div key={task.id}>{task.title}</div>
+      ))}
+    </div>
+  );
+}
+```
+
+### Creating a Reusable Component
+
+```typescript
+// packages/ui/src/Button.tsx
+export interface ButtonProps 
+  extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+  variant?: 'primary' | 'secondary';
+  size?: 'sm' | 'md' | 'lg';
+}
+
+export function Button({ 
+  variant = 'primary', 
+  size = 'md',
+  ...props 
+}: ButtonProps) {
+  const baseStyles = 'font-medium rounded transition-colors';
+  const variantStyles = {
+    primary: 'bg-blue-600 text-white hover:bg-blue-700',
+    secondary: 'bg-gray-200 text-gray-900 hover:bg-gray-300',
+  };
+  const sizeStyles = {
+    sm: 'px-3 py-1 text-sm',
+    md: 'px-4 py-2 text-base',
+    lg: 'px-6 py-3 text-lg',
+  };
+
+  return (
+    <button 
+      className={`${baseStyles} ${variantStyles[variant]} ${sizeStyles[size]}`}
+      {...props} 
+    />
+  );
+}
 ```
 
 ## 🤝 Contributing
 
-See [CONTRIBUTING.md](./CONTRIBUTING.md) for:
-- Development workflow
-- Code style guide
-- Commit conventions
-- PR process
-- Common tasks
+Contributions are welcome! Please follow these guidelines:
 
-## 📝 License
+1. Create a feature branch: `git checkout -b feature/your-feature`
+2. Make your changes
+3. Run tests: `pnpm test`
+4. Type-check: `pnpm type-check`
+5. Lint: `pnpm lint`
+6. Commit: `git commit -am 'Add your feature'`
+7. Push: `git push origin feature/your-feature`
+8. Open a Pull Request
 
-MIT License - feel free to use this as a portfolio project!
+## 📄 License
+
+This project is open source and available under the MIT License.
+
+## 📞 Support
+
+For issues, questions, or suggestions:
+- Open an issue on GitHub
+- Check existing documentation
+- Review the code examples above
 
 ## 🎓 Learning Resources
 
-- [Next.js Docs](https://nextjs.org/docs)
-- [Prisma Docs](https://www.prisma.io/docs/)
+- [Next.js Documentation](https://nextjs.org/docs)
+- [Prisma ORM](https://www.prisma.io/docs/)
 - [TanStack Query](https://tanstack.com/query/latest)
-- [Zustand](https://github.com/pmndrs/zustand)
-- [NextAuth.js](https://next-auth.js.org/)
 - [Tailwind CSS](https://tailwindcss.com/docs)
-
-## ⭐ Show Your Support
-
-If you find this project helpful, please give it a star! ⭐
-
----
-
-**Ready to impress interviewers?** This is production-grade code that demonstrates:
-- Full-stack development
-- System design thinking
-- Database modeling
-- Authentication & authorization
-- UI/UX implementation
-- DevOps (Docker)
-- Best practices
-
-Perfect for senior engineer roles! 🎯
+- [NextAuth.js](https://next-auth.js.org/)
+- [Turborepo](https://turbo.build/repo/docs)
+- [Zustand](https://zustand-demo.vercel.app/)
