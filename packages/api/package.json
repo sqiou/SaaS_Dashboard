@@ -1,0 +1,21 @@
+{
+  "name": "@saas/api",
+  "version": "0.0.1",
+  "description": "API client for the SaaS platform",
+  "private": true,
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "scripts": {
+    "build": "tsc",
+    "type-check": "tsc --noEmit",
+    "clean": "rm -rf dist"
+  },
+  "dependencies": {
+    "@saas/types": "workspace:*",
+    "@tanstack/react-query": "^5.28.0"
+  },
+  "devDependencies": {
+    "@types/node": "^20.10.5",
+    "typescript": "^5.3.3"
+  }
+}
