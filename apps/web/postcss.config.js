@@ -1,11 +1,6 @@
 module.exports = {
-  config: {
-    content: [
-      './src/**/*.{js,ts,jsx,tsx}',
-      '../../packages/ui/src/**/*.{js,ts,jsx,tsx}',
-    ],
-    theme: {
-      extend: {},
-    },
+  plugins: {
+    tailwindcss: {},
+    autoprefixer: {},
   },
 };

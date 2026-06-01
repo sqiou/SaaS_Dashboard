@@ -10,10 +10,9 @@
     "generate": "prisma generate"
   },
   "devDependencies": {
-    "@prisma/cli": "^5.7.1",
-    "prisma": "^5.7.1"
+    "prisma": "^2.30.0"
   },
   "dependencies": {
-    "@prisma/client": "^5.7.1"
+    "@prisma/client": "^2.30.0"
   }
 }

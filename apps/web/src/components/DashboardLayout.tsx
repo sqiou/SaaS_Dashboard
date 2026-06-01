@@ -2,7 +2,6 @@
 
 import React, { Suspense } from 'react';
 import { useState } from 'react';
-import { Button } from '@saas/ui';
 
 interface Sidebar {
   isOpen: boolean;
@@ -58,9 +57,9 @@ export function DashboardLayout({
 
         {sidebarOpen && (
           <div className="p-4 border-t border-gray-800">
-            <Button className="w-full bg-blue-600 hover:bg-blue-700" size="sm">
+            <button className="w-full bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg text-sm font-medium transition-colors">
               Sign Out
-            </Button>
+            </button>
           </div>
         )}
       </aside>

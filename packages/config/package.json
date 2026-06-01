@@ -4,7 +4,6 @@
   "description": "Shared configuration",
   "private": true,
   "exports": {
-    "./eslint": "./eslint.config.js",
-    "./tsconfig": "./tsconfig.json"
+    "./eslint": "./eslint.config.js"
   }
 }

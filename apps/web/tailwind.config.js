@@ -1,4 +1,4 @@
-# Tailwind CSS configuration
+// Tailwind CSS configuration
 module.exports = {
   content: [
     './src/**/*.{js,ts,jsx,tsx}',

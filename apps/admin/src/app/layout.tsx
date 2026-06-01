@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import '@/styles/globals.css';
 
 export const metadata: Metadata = {
   title: 'Admin Panel | SaaS Dashboard',
@@ -25,12 +26,12 @@ export default function RootLayout({
             </div>
             <nav className="flex-1 px-3 py-4 space-y-2">
               {[
-                { name: 'Dashboard', icon: '📊', href: '/admin' },
-                { name: 'Users', icon: '👥', href: '/admin/users' },
-                { name: 'Organizations', icon: '🏢', href: '/admin/organizations' },
-                { name: 'Analytics', icon: '📈', href: '/admin/analytics' },
-                { name: 'Audit Logs', icon: '📋', href: '/admin/audit-logs' },
-                { name: 'Settings', icon: '⚙️', href: '/admin/settings' },
+                { name: 'Dashboard', icon: '📊', href: '/' },
+                { name: 'Users', icon: '👥', href: '/users' },
+                { name: 'Organizations', icon: '🏢', href: '/organizations' },
+                { name: 'Analytics', icon: '📈', href: '/analytics' },
+                { name: 'Audit Logs', icon: '📋', href: '/audit-logs' },
+                { name: 'Settings', icon: '⚙️', href: '/settings' },
               ].map((item) => (
                 <a
                   key={item.href}
