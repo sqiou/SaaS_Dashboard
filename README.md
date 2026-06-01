@@ -322,89 +322,6 @@ pnpm install
 pnpm exec turbo prune --scope=@saas/web --docker
 ```
 
-## 📚 Code Examples
-
-### Creating a Task API Endpoint
-
-```typescript
-// apps/web/src/app/api/tasks/route.ts
-import { prisma } from '@saas/db';
-import { NextRequest, NextResponse } from 'next/server';
-
-export async function POST(request: NextRequest) {
-  const body = await request.json();
-  
-  const task = await prisma.task.create({
-    data: {
-      title: body.title,
-      projectId: body.projectId,
-      priority: body.priority,
-      dueDate: body.dueDate,
-    },
-  });
-
-  return NextResponse.json(task);
-}
-```
-
-### Using the API Client
-
-```typescript
-// apps/web/src/pages/tasks.tsx
-import { tasksApi } from '@saas/api';
-import { useQuery } from '@tanstack/react-query';
-
-export default function TasksPage() {
-  const { data: tasks } = useQuery({
-    queryKey: ['tasks'],
-    queryFn: () => tasksApi.getTasks(),
-  });
-
-  return (
-    <div>
-      {tasks?.map(task => (
-        <div key={task.id}>{task.title}</div>
-      ))}
-    </div>
-  );
-}
-```
-
-### Creating a Reusable Component
-
-```typescript
-// packages/ui/src/Button.tsx
-export interface ButtonProps 
-  extends React.ButtonHTMLAttributes<HTMLButtonElement> {
-  variant?: 'primary' | 'secondary';
-  size?: 'sm' | 'md' | 'lg';
-}
-
-export function Button({ 
-  variant = 'primary', 
-  size = 'md',
-  ...props 
-}: ButtonProps) {
-  const baseStyles = 'font-medium rounded transition-colors';
-  const variantStyles = {
-    primary: 'bg-blue-600 text-white hover:bg-blue-700',
-    secondary: 'bg-gray-200 text-gray-900 hover:bg-gray-300',
-  };
-  const sizeStyles = {
-    sm: 'px-3 py-1 text-sm',
-    md: 'px-4 py-2 text-base',
-    lg: 'px-6 py-3 text-lg',
-  };
-
-  return (
-    <button 
-      className={`${baseStyles} ${variantStyles[variant]} ${sizeStyles[size]}`}
-      {...props} 
-    />
-  );
-}
-```
-
 ## 🤝 Contributing
 
 Contributions are welcome! Please follow these guidelines:
@@ -417,17 +334,6 @@ Contributions are welcome! Please follow these guidelines:
 6. Commit: `git commit -am 'Add your feature'`
 7. Push: `git push origin feature/your-feature`
 8. Open a Pull Request
-
-## 📄 License
-
-This project is open source and available under the MIT License.
-
-## 📞 Support
-
-For issues, questions, or suggestions:
-- Open an issue on GitHub
-- Check existing documentation
-- Review the code examples above
 
 ## 🎓 Learning Resources
 
