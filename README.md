@@ -34,9 +34,6 @@ Then open:
 - **Dashboard**: http://localhost:3000
 - **Admin Panel**: http://localhost:3001
 
-### Demo Credentials
-- **Email**: demo@example.com
-- **Password**: password
 
 ## 📊 Project Overview
 
@@ -234,82 +231,6 @@ pnpm dev              # Start admin panel only
 
 cd packages/ui
 pnpm build            # Build UI component library
-```
-
-## 🚀 Deployment
-
-### Deploy to Vercel
-
-The easiest way to deploy is using [Vercel](https://vercel.com):
-
-```bash
-# Push to GitHub
-git push origin main
-
-# Connect repo to Vercel
-# - Web app: apps/web
-# - Admin app: apps/admin
-# Set environment variables in Vercel dashboard
-# Deploy!
-```
-
-### Docker Deployment
-
-```bash
-# Build Docker image
-docker build -t saas-dashboard:latest .
-
-# Run with Docker Compose (includes PostgreSQL)
-docker-compose up -d
-
-# View logs
-docker-compose logs -f
-
-# Stop services
-docker-compose down
-```
-
-### Environment Variables
-
-Create `.env.local` files in `apps/web`, `apps/admin`, and `packages/db`:
-
-```env
-# Database
-DATABASE_URL=postgresql://user:password@localhost:5432/saas_db
-
-# NextAuth
-NEXTAUTH_SECRET=your-secret-key-here
-NEXTAUTH_URL=http://localhost:3000
-
-# API Configuration
-NEXT_PUBLIC_API_URL=http://localhost:3000/api
-```
-
-Generate a secure NEXTAUTH_SECRET:
-```bash
-openssl rand -base64 32
-```
-
-## 🏃 Troubleshooting
-
-### Port Already in Use
-```bash
-# Kill process on port 3000 or 3001
-lsof -ti:3000 | xargs kill -9
-lsof -ti:3001 | xargs kill -9
-```
-
-### Database Connection Issues
-```bash
-# Check if PostgreSQL is running
-docker-compose ps
-
-# Restart services
-docker-compose restart
-
-# Reset database
-cd packages/db
-pnpm db:push --force-reset
 ```
 
 ### Dependencies Issues
